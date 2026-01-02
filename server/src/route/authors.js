@@ -7,14 +7,14 @@ const router = express.Router();
 
 const authorSchema = Joi.object({
   name: Joi.string().min(1).required(),
-  address: Joi.string().min(1).required(),
-  capacity: Joi.number().integer().min(0).required()
+  biography: Joi.string().min(1).required(),
+  bookspublished: Joi.string().min(1).required()
 });
 
 router.get("/", async (req, res, next) => {
   try {
     const authors = await Author.find().lean();
-    res.json({ ok: true, data: uthors });
+    res.json({ ok: true, data: author });
   } catch (err) {
     next(err);
   }
