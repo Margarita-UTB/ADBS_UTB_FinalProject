@@ -8,7 +8,7 @@ const router = express.Router();
 const authorSchema = Joi.object({
   name: Joi.string().min(1).required(),
   bookspublished: Joi.string().min(1).required()
-});
+}); 
 
 router.get("/", async (req, res, next) => {
   try {
