@@ -9,7 +9,7 @@ const bookSchema = Joi.object({
   name: Joi.string().min(1).required(),
   authorId: Joi.string().hex().length(24).required(),
   genre: Joi.string().allow("").optional(),
-  synopsis: Joi.string().allow("").optional()
+  synopsis: Joi.string().min(1).required()
 });
 
 router.get("/", async (req, res, next) => {

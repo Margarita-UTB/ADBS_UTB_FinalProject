@@ -7,7 +7,7 @@ const router = express.Router();
 
 const authorSchema = Joi.object({
   name: Joi.string().min(1).required(),
-  synopsis: Joi.string().allow("").optional(),
+  Biography: Joi.string().allow("").optional(),
   bookspublished: Joi.string().min(1).required()
 }); 
 
