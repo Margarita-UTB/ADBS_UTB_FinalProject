@@ -5,7 +5,7 @@ import Book from "./models/Books.js";
 import Author from "./models/Authors.js";
 
 // URI de conexión por defecto
-const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/petrescue";
+const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/Library";
 
 async function run() {
   // Conectar a la base de datos
