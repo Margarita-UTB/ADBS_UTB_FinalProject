@@ -8,4 +8,4 @@ const AuthorSchema = new mongoose.Schema({
     { timestamps: true }
 );
 
-export default mongoose.model("Author", AuthorScheme);
+export default mongoose.model("Author", AuthorSchema);

@@ -11,4 +11,4 @@ const BookSchema = new mongoose.Schema({
 
 BookSchema.index({name : "text", description: "text" });
 
-export default mongoose.model("Book", BookScheme);
+export default mongoose.model("Book", BookSchema);

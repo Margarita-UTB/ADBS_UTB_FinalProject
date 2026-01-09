@@ -14,7 +14,7 @@ const authorSchema = Joi.object({
 router.get("/", async (req, res, next) => {
   try {
     const authors = await Author.find().lean();
-    res.json({ ok: true, data: author });
+    res.json({ ok: true, data: authors });
   } catch (err) {
     next(err);
   }

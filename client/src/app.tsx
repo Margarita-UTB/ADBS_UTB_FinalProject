@@ -1,7 +1,7 @@
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
-import Home from "./Home";
-import bookdescription from "./book_description";
-import authordescription from "./pages/author_description";
+import Home from "./home";
+import BookDescription from "./book_description";
+import AuthorDescription from "./author_description";
 import "./App.css";
 
 // Componente principal de la aplicación
@@ -15,19 +15,19 @@ function App() {
       <header className="header">
         <div className="nav">
           <Link to="/" className="brand">Library</Link>
-          <Link to="/author">Author</Link>
+          <Link to="/authors">Authors</Link>
         </div>
-        {/* Botón para crear nuevo animal */}
-        <button className="new-btn" onClick={() => navigate("/book/new")}>New</button>
+        {/* Botón para crear nuevo libro */}
+        <button className="new-btn" onClick={() => navigate("/books/new")}>New Book</button>
       </header>
       <main>
         {/* Definición de rutas y componentes asociados */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/books/new" element={<bookdescription mode="create" />} />
-          <Route path="/books/:id" element={<bookdescription mode="view" />} />
-          <Route path="/books/:id/edit" element={<bookdescription mode="edit" />} />
-          <Route path="/authors" element={<Authors />} />
+          <Route path="/books/new" element={<BookDescription mode="create" />} />
+          <Route path="/books/:id" element={<BookDescription mode="view" />} />
+          <Route path="/books/:id/edit" element={<BookDescription mode="edit" />} />
+          <Route path="/authors" element={<AuthorDescription />} />
         </Routes>
       </main>
     </div>

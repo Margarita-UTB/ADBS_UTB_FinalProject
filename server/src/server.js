@@ -4,10 +4,10 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import morgan from "morgan";
-import booksRouter from "./routes/books.js";
-import authorsRouter from "./routes/authors.js";
-import Book from "./models/Book.js";
-import Author from "./models/Author.js";
+import booksRouter from "./route/books.js";
+import authorsRouter from "./route/authors.js";
+import Book from "./models/Books.js";
+import Author from "./models/Authors.js";
 
 const app = express();
 
@@ -39,7 +39,7 @@ async function ensureSeed() {
   const sc = await Author.countDocuments();
   const ac = await Book.countDocuments();
   if (sc < 5) {
-    const author = await Author.insertMany([
+    const authors = await Author.insertMany([
       { name: "Jane Austen", 
         biography: "", 
         bookspublished: "Pried and Prejudice, Emma, Sense and Sensibility" },
@@ -65,31 +65,31 @@ async function ensureSeed() {
       const [s1, s2, s3, s4, s5] = authors;
       await Book.insertMany([
         { name: "ried and Prejudice", 
-          authorId: "s1._id", 
+          authorId: s1._id, 
           genre: "Romatic Comedy", 
           synopsis: "Pride and Prejudice by Jane Austen follows witty Elizabeth Bennet and wealthy, arrogant Mr. Darcy, as they overcome"
                 +"initial dislike, fueled by misunderstandings and class differences, to find love in Regency England, alongside Elizabeth's"
                 +"sister Jane's romance with Darcy's friend Bingley, exploring themes of marriage, manners, and social standing" },
         { name: "Twisted Games", 
-          authorId: "s2._id", 
+          authorId: s2._id, 
           genre: "Contemporary Romace", 
           synopsis: "Princess Bridget von Ascheberg and her stoic, broody royal bodyguard, Rhys Larsen, exploring their forbidden"
                 +"enemies-to-lovers relationship as duty clashes with desire when she faces a potential marriage and throne she"
                 +"never wanted, all while navigating royal expectations and hidden passion" },
         { name: "Dracula", 
-          authorId: "s3._id", 
+          authorId: s3._id, 
           genre: "Horror", 
           synopsis: "the vampire Count Dracula's attempt to move from Transylvania to England to spread his undead curse, clashing with a" 
                 +"group led by Professor Van Helsing who hunts him down using diaries, letters, and scientific methods to protect victims"
                 +"like Lucy Westenra and ultimately destroy the Count" },
         { name: "A court of silver flames", 
-          authorId: "s4._id", 
+          authorId: s4._id, 
           genre: "Fantasy-Romance", 
           synopsis: "follows Nesta Archeron's journey of healing and self-discovery as she deals with severe trauma from the war, becoming self-destructive "
                 +"until she's forced to train with the Illyrian warrior Cassian, sparking an intense, fiery romance "
                 +"and a path to empowerment as they confront both internal demons and external political threats to the Fae realms" },
         { name: "new moon", 
-          authorId: "s5._id", 
+          authorId: s5._id, 
           genre: "Fantasy-Romance", 
           synopsis: "Bella and Edward face a devastating separation, the mysterious appearance of dangerous wolves roaming the forest in Forks,"
                 +" a terrifying threat of revenge from a female vampire and a deliciously sinister encounter with Italys reigning royal family"

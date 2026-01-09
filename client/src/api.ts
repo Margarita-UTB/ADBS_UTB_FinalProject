@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // URL base de la API, tomada de variables de entorno o por defecto a localhost:4000
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:4000";
+const API_BASE = "http://localhost:4000";
 
 // Instancia de axios preconfigurada
 export const api = axios.create({
@@ -14,6 +14,7 @@ export type Book = {
   _id?: string; // Opcional porque al crear no tiene ID aún
   name: string;
   authorId: string;
+  genre: string;
   synopsis: string;
 };
 
