@@ -43,12 +43,12 @@
 }
 /* Botón destacado "New" */
 .new-btn {
-  border: 1px solid #3a7afe;
+  border: 1px solid #fea3ea;
   padding: 0.5rem 0.9rem;
-  background: linear-gradient(180deg, #2e6bf3, #1f56e0);
+  background: linear-gradient(180deg, #ff00bf, #ff5dd6);
   color: #fff;
   border-radius: 8px;
-  box-shadow: 0 6px 18px rgba(46,107,243,0.3);
+  box-shadow: 0 6px 18px rgba(131, 13, 115, 0.73);
 }
 /* Barra de herramientas (buscador) */
 .toolbar {
@@ -67,8 +67,8 @@
 }
 .input:focus {
   outline: none;
-  border-color: #3a7afe;
-  box-shadow: 0 0 0 3px rgba(58,122,254,0.25);
+  border-color: #ff00bf;
+  box-shadow: 0 0 0 3px rgba(131, 13, 115, 0.73);
 }
 /* Botones genéricos */
 .btn {
@@ -79,13 +79,13 @@
   border-radius: 8px;
 }
 .btn:hover {
-  border-color: #3a7afe;
+  border-color: #ff00bf;
 }
 /* Botón primario (azul) */
 .btn-primary {
-  border-color: #3a7afe;
-  background: linear-gradient(180deg, #2e6bf3, #1f56e0);
-  box-shadow: 0 6px 18px rgba(46,107,243,0.3);
+  border-color: #ff00bf;
+  background: linear-gradient(180deg, #ff00bf, #ff5dd6);
+  box-shadow: 0 6px 18px rgba(131, 13, 115, 0.73);
 }
 /* Botón transparente */
 .btn-outline {
@@ -127,7 +127,7 @@
 }
 .card:hover {
   transform: translateY(-2px);
-  border-color: #3a7afe;
+  border-color: #ff00bf;
 }
 .card .title {
   font-weight: 700;
@@ -177,6 +177,6 @@
 }
 .form input:focus, .form textarea:focus, .form select:focus {
   outline: none;
-  border-color: #3a7afe;
-  box-shadow: 0 0 0 3px rgba(58,122,254,0.25);
+  border-color: #ff00bf;
+  box-shadow: 0 0 0 3px rgba(131, 13, 115, 0.73);
 }

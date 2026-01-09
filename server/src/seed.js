@@ -44,7 +44,7 @@ async function run() {
 
   // Crear libros de ejemplo y asignarlos a los refugios creados
   await Book.insertMany([
-    { name: "ried and Prejudice", authorId: "s1._id", genre: "Romatic Comedy", 
+    { name: "Pride and Prejudice", authorId: "s1._id", genre: "Romatic Comedy", 
         synopsis: "Pride and Prejudice by Jane Austen follows witty Elizabeth Bennet and wealthy, arrogant Mr. Darcy, as they overcome"
                 +"initial dislike, fueled by misunderstandings and class differences, to find love in Regency England, alongside Elizabeth's"
                 +"sister Jane's romance with Darcy's friend Bingley, exploring themes of marriage, manners, and social standing" },

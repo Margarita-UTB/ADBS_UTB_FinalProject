@@ -11,7 +11,7 @@ import Author from "./models/Authors.js";
 
 const app = express();
 
-const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/library";
+const MONGO_URI = process.env.MONGO_URI || "mongodb://172.17.0.1:27017/library";
 const PORT = process.env.PORT || 4000;
 const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || "http://localhost:5173";
 
@@ -64,7 +64,7 @@ async function ensureSeed() {
     if (ac < 5) {
       const [s1, s2, s3, s4, s5] = authors;
       await Book.insertMany([
-        { name: "ried and Prejudice", 
+        { name: "Pride and Prejudice", 
           authorId: s1._id, 
           genre: "Romatic Comedy", 
           synopsis: "Pride and Prejudice by Jane Austen follows witty Elizabeth Bennet and wealthy, arrogant Mr. Darcy, as they overcome"

@@ -7,9 +7,9 @@ function Author() {
   const [author, setAuthor] = useState<Author[]>([]);
   const [loading, setLoading] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null); // ID del refugio que se está editando
-  const [form, setForm] = useState<{ name: string; bibliography: string; bookspublished: string }>({
+  const [form, setForm] = useState<{ name: string; biography: string; bookspublished: string }>({
     name: "",
-    bibliography: "",
+    biography: "",
     bookspublished: ""
   });
 
@@ -31,8 +31,8 @@ function Author() {
 
   // Crea un nuevo refugio
   async function createAuthor() {
-    await api.post("/author", form);
-    setForm({ name: "", bibliography: "", bookspublished: "" }); // Limpia el formulario
+    await api.post("/authors", form);
+    setForm({ name: "", biography: "", bookspublished: "" }); // Limpia el formulario
     await load(); // Recarga la lista
   }
 
@@ -60,7 +60,7 @@ function Author() {
         </label>
         <label>
           Bibliografía
-          <input className="input" value={form.bibliography} onChange={(e) => setForm({ ...form, bibliography: e.target.value })} />
+          <input className="input" value={form.biography} onChange={(e) => setForm({ ...form, biography: e.target.value })} />
         </label>
         <label>
           Libros publicados
@@ -85,7 +85,7 @@ function Author() {
                 </label>
                 <label>
                   Bibliografía
-                  <input className="input" defaultValue={s.bibliography} onChange={(e) => setForm({ ...form, bibliography: e.target.value })} />
+                  <input className="input" defaultValue={s.biography} onChange={(e) => setForm({ ...form, biography: e.target.value })} />
                 </label>
                 <label>
                   Libros publicados
@@ -100,10 +100,10 @@ function Author() {
               /* Vista normal de la tarjeta del author */
               <>
                 <div className="title">{s.name}</div>
-                <div>{s.bibliography}</div>
+                <div>{s.biography}</div>
                 <div>Libros publicados: {s.bookspublished}</div>
                 <div className="actions">
-                  <button className="btn btn-outline" onClick={() => { setEditingId(s._id); setForm({ name: s.name, bibliography: s.bibliography, bookspublished: s.bookspublished }); }}>Editar</button>
+                  <button className="btn btn-outline" onClick={() => { setEditingId(s._id); setForm({ name: s.name, biography: s.biography, bookspublished: s.bookspublished }); }}>Editar</button>
                   <button className="btn btn-danger" onClick={() => deleteAuthor(s._id)}>Eliminar</button>
                 </div>
               </>

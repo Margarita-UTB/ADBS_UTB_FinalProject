@@ -5,6 +5,11 @@ import { api } from "./api";
 import type { Book } from "./api";
 import { useNavigate } from "react-router-dom";
 
+interface Author {
+  name: string;
+  [key: string]: unknown;
+}
+
 // Componente de la página principal (Home)
 // Muestra el listado de libros con buscador
 function Home() {
@@ -59,7 +64,7 @@ function Home() {
         {books.map((a) => (
           <li key={a._id} className="card" onClick={() => navigate(`/books/${a._id}`)}>
             <div className="title">{a.name}</div>
-            <div className="genero">{a.genre} • {a.authorId}</div>
+            <div className="genero">{a.genre} • {typeof a.authorId === 'object' ? (a.authorId as Author).name : a.authorId}</div>
             <div className="synopsis">{a.synopsis}</div>
           </li>
         ))}

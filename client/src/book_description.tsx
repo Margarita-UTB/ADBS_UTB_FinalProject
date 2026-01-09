@@ -102,7 +102,7 @@ function BookDetails({ mode }: { mode: Mode }) {
             <div className="author">
               <div className="subtitle">Author</div>
               <div>{author.name}</div>
-              <div>{author.bibliography}</div>
+              <div>{author.biography}</div>
               <div>{author.bookspublished}</div>
             </div>
           )}

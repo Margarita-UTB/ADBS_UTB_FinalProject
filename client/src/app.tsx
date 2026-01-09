@@ -2,7 +2,7 @@ import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Home from "./home";
 import BookDescription from "./book_description";
 import AuthorDescription from "./author_description";
-import "./App.css";
+import "./app.css";
 
 // Componente principal de la aplicación
 // Define la estructura base (header, navegación) y las rutas
