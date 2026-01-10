@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Author default Schema
 const AuthorSchema = new mongoose.Schema({
     name: { type: String, required :true, trim: true},
     biography: { type: String, default: "" },

@@ -1,5 +1,3 @@
-// une tod el backend, conecta el back con el front
-
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
@@ -15,21 +13,21 @@ const MONGO_URI = process.env.MONGO_URI || "mongodb://172.17.0.1:27017/library";
 const PORT = process.env.PORT || 4000;
 const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || "http://localhost:5173";
 
-app.use(cors()); // Permite todos los orígenes para facilitar el desarrollo local
-app.use(express.json()); // Parsea cuerpos JSON
-app.use(morgan("dev")); // Log de peticiones HTTP en consola
+app.use(cors()); // lets in requests from other origins
+app.use(express.json()); //   parse JSON request bodies
+app.use(morgan("dev")); // log HTTP requests in console
 
-// Endpoint de salud / estado
+// Endpoint 
 app.get("/", async (req, res) => {
   const count = await Book.countDocuments();
   res.json({ ok: true, service: "library-api", books: count });
 });
 
-// Rutas de la API
+// API route
 app.use("/books", booksRouter);
 app.use("/authors", authorsRouter);
 
-// Manejo global de errores
+// Manage  errors
 app.use((err, req, res, next) => {
   res.status(500).json({ ok: false, error: "Internal server error" });
 });

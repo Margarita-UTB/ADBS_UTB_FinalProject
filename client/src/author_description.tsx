@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { api } from "./api";
 import type { Author } from "./api";
 
-// Componente para la gestión de refugios (Listar, Crear, Editar, Eliminar)
+// Manage authors: list, create, edit, delete
 function Author() {
   const [author, setAuthor] = useState<Author[]>([]);
   const [loading, setLoading] = useState(false);
@@ -13,7 +13,7 @@ function Author() {
     bookspublished: ""
   });
 
-  // Carga la lista de refugios
+  // list of authors
   async function load() {
     setLoading(true);
     try {
@@ -24,26 +24,26 @@ function Author() {
     }
   }
 
-  // Carga inicial
+  // initial load
   useEffect(() => {
     load();
   }, []);
 
-  // Crea un nuevo refugio
+  // create a new author
   async function createAuthor() {
     await api.post("/authors", form);
-    setForm({ name: "", biography: "", bookspublished: "" }); // Limpia el formulario
-    await load(); // Recarga la lista
+    setForm({ name: "", biography: "", bookspublished: "" });
+    await load(); // Recharge the list
   }
 
-  // Actualiza un refugio existente
+  // update an existing author
   async function updateAuthor(id: string) {
     await api.put(`/authors/${id}`, form);
-    setEditingId(null); // Sale del modo edición
+    setEditingId(null); // exits edition mode
     await load();
   }
 
-  // Elimina un author
+  // deletes an author
   async function deleteAuthor(id: string) {
     await api.delete(`/authors/${id}`);
     await load();
@@ -52,7 +52,7 @@ function Author() {
   return (
     <div>
       <div className="subtitle">Crear nuevo author</div>
-      {/* Formulario de creación */}
+      {/* creation "survey" */}
       <form className="form" onSubmit={(e) => { e.preventDefault(); createAuthor(); }}>
         <label>
           Nombre
@@ -76,7 +76,7 @@ function Author() {
       <ul className="list">
         {author.map((s) => (
           <li key={s._id} className="card">
-            {/* Si editingId coincide con este author, muestra formulario de edición */}
+            {/* If editingId coincides an author, show the edit form */}
             {editingId === s._id ? (
               <form className="form" onSubmit={(e) => { e.preventDefault(); updateAuthor(s._id); }}>
                 <label>
@@ -97,7 +97,7 @@ function Author() {
                 </div>
               </form>
             ) : (
-              /* Vista normal de la tarjeta del author */
+              /* visualization of the author card */
               <>
                 <div className="title">{s.name}</div>
                 <div>{s.biography}</div>

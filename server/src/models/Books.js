@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Book default Schema
 const BookSchema = new mongoose.Schema({
     name: { type: String, required :true, trim: true},
     authorId: { type: mongoose.Schema.Types.ObjectId, ref: "author", required: true},

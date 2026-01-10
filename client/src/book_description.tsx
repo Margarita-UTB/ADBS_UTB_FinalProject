@@ -5,15 +5,14 @@ import { useNavigate, useParams } from "react-router-dom";
 
 type Mode = "view" | "edit" | "create";
 
-// Componente para ver detalles, crear o editar un libro
-// Recibe el modo de operación como prop
+// create, edit, view book details
 function BookDetails({ mode }: { mode: Mode }) {
-  const params = useParams(); // Obtiene parámetros de la URL (ej: id)
+  const params = useParams();
   const navigate = useNavigate();
-  const [book, setBook] = useState<Book | null>(null); // Datos del libro actual
-  const [author, setAuthor] = useState<Author | null>(null); // Datos del autor asociado
-  const [authors, setAuthors] = useState<Author[]>([]); // Lista de autores disponibles para el select
-  const [form, setForm] = useState<Book>({ // Estado del formulario
+  const [book, setBook] = useState<Book | null>(null); // data from the book
+  const [author, setAuthor] = useState<Author | null>(null); // data from the author
+  const [authors, setAuthors] = useState<Author[]>([]); // Authors list to choose from
+  const [form, setForm] = useState<Book>({ // ""survey"" state
     name: "",
     authorId: "",
     genre: "",
@@ -21,21 +20,21 @@ function BookDetails({ mode }: { mode: Mode }) {
   });
   const [busy, setBusy] = useState(false); // Estado para deshabilitar botones durante peticiones
 
-  // Determina el modo actual basándose en la prop recibida
+  // Determines the current mode based on the received prop
   const currentMode: Mode = useMemo(() => {
     if (mode === "create") return "create";
     if (mode === "edit") return "edit";
     return "view";
   }, [mode]);
 
-  // Efecto para cargar los datos del animal si estamos en modo view o edit
+  // Load book data when in view or edit mode
   useEffect(() => {
     async function load() {
       if (currentMode === "create") return;
       const id = params.id!;
       const { data } = await api.get(`/books/${id}`);
       setBook(data.data);
-      // Rellena el formulario con los datos cargados
+      // fills the form with the book data
       setForm({
         _id: data.data._id,
         name: data.data.name,
@@ -43,19 +42,19 @@ function BookDetails({ mode }: { mode: Mode }) {
         genre: data.data.genre,
         synopsis: data.data.synopsis || ""
       });
-      // Carga información extra del autor para mostrar en modo vista
+      // load author data
       const authorResp = await api.get(`/authors/${data.data.authorId}`);
       setAuthor(authorResp.data.data);
     }
     load();
   }, [params.id, currentMode]);
 
-  // Efecto para cargar la lista de autores (necesaria para el dropdown en crear/editar)
+  // Charge the authors list
   useEffect(() => {
     async function loadAuthors() {
       const { data } = await api.get("/authors");
       setAuthors(data.data);
-      // Si estamos creando, pre-selecciona el primer autor por defecto
+      // If in create mode, set the first author as default
       if (currentMode === "create" && data.data.length > 0) {
         setForm((prev) => ({ ...prev, authorId: data.data[0]._id }));
       }
@@ -63,7 +62,7 @@ function BookDetails({ mode }: { mode: Mode }) {
     loadAuthors();
   }, [currentMode]);
 
-  // Maneja el envío del formulario (Crear o Actualizar)
+  // Manege saving (create or update)
   async function onSave() {
     setBusy(true);
     try {
@@ -72,13 +71,13 @@ function BookDetails({ mode }: { mode: Mode }) {
       } else {
         await api.put(`/books/${form._id}`, form);
       }
-      navigate("/"); // Vuelve al home tras guardar
+      navigate("/"); // return to the home page
     } finally {
       setBusy(false);
     }
   }
 
-  // Maneja la eliminación del libro
+  // delete a book
   async function onDelete() {
     if (!book?._id) return;
     setBusy(true);
@@ -92,7 +91,7 @@ function BookDetails({ mode }: { mode: Mode }) {
 
   return (
     <div>
-      {/* MODO VISTA: Muestra detalles y botones de acción */}
+      {/* VISUAL MODE: Shows details and buttons */}
       {currentMode === "view" && book && (
         <div className="details">
           <div className="name">{book.name}</div>
@@ -113,7 +112,7 @@ function BookDetails({ mode }: { mode: Mode }) {
         </div>
       )}
 
-      {/* MODO EDICIÓN / CREACIÓN: Muestra formulario */}
+      {/* EDIT/CREATE MODE: Shows the form */}
       {(currentMode === "edit" || currentMode === "create") && (
         <form className="form" onSubmit={(e) => { e.preventDefault(); onSave(); }}>
           <label>

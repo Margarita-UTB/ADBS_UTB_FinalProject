@@ -1,5 +1,3 @@
-// pantalla de home
-
 import { useEffect, useState } from "react";
 import { api } from "./api";
 import type { Book } from "./api";
@@ -10,37 +8,37 @@ interface Author {
   [key: string]: unknown;
 }
 
-// Componente de la página principal (Home)
-// Muestra el listado de libros con buscador
+// Home Main component 
+// Shows list of books
 function Home() {
-  const [books, setBooks] = useState<Book[]>([]); // Estado para lista de libros
-  const [q, setQ] = useState(""); // Estado para el texto de búsqueda
-  const [loading, setLoading] = useState(false); // Estado de carga
-  const navigate = useNavigate(); // Hook para navegación
+  const [books, setBooks] = useState<Book[]>([]); // State for the list of books
+  const [q, setQ] = useState(""); // State for the search text
+  const [loading, setLoading] = useState(false); // State for loading
+  const navigate = useNavigate(); // Hook for navigation
 
-  // Función asíncrona para obtener libros de la API
+  // Asynchronous function to fetch books from the API
   async function fetchBooks(query?: string) {
     setLoading(true);
     try {
-      // Si hay query usa el endpoint de búsqueda, si no, el listado general
+      // If there is a query, use the search endpoint, otherwise use the general list
       const url = query ? `/books/search?q=${encodeURIComponent(query)}` : "/books";
       const { data } = await api.get(url);
       setBooks(data.data);
     } catch {
-      setBooks([]); // En caso de error, limpia la lista
+      setBooks([]); // if error, clear the list
     } finally {
       setLoading(false);
     }
   }
 
-  // Carga inicial de libros al montar el componente
+  // Initial load of books
   useEffect(() => {
     fetchBooks();
   }, []);
 
   return (
     <div>
-      {/* Barra de herramientas con buscador */}
+      {/* Tools bar */}
       <div className="toolbar">
         <input
           className="input"
@@ -51,15 +49,15 @@ function Home() {
         <button className="btn btn-outline" onClick={() => fetchBooks(q)}>Search</button>
       </div>
       
-      {/* Indicador de carga */}
+      {/* loading indicator */}
       {loading && <div>Loading your next adventure...</div>}
       
-      {/* Mensaje si no hay resultados */}
+      {/* Message if no results */}
       {!loading && books.length === 0 && (
-        <div className="empty">There are no books for now. Add one using the button “New”.</div>
+        <div className="empty">There are no books for now. Add one using the button “New Book”.</div>
       )}
       
-      {/* Lista de tarjetas de libros */}
+      {/* List of book cards */}
       <ul className="list">
         {books.map((a) => (
           <li key={a._id} className="card" onClick={() => navigate(`/books/${a._id}`)}>

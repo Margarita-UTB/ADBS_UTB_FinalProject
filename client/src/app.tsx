@@ -4,24 +4,24 @@ import BookDescription from "./book_description";
 import AuthorDescription from "./author_description";
 import "./app.css";
 
-// Componente principal de la aplicación
-// Define la estructura base (header, navegación) y las rutas
+// Main component of the application Web
+// Main structure (header, navigation, and routing)
 function App() {
   const navigate = useNavigate();
 
   return (
     <div className="container">
-      {/* Cabecera con navegación */}
+      {/* header with navigation */}
       <header className="header">
         <div className="nav">
           <Link to="/" className="brand">Library</Link>
           <Link to="/authors">Authors</Link>
         </div>
-        {/* Botón para crear nuevo libro */}
+        {/* create new book button */}
         <button className="new-btn" onClick={() => navigate("/books/new")}>New Book</button>
       </header>
       <main>
-        {/* Definición de rutas y componentes asociados */}
+        {/* define routes */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/books/new" element={<BookDescription mode="create" />} />

@@ -1,22 +1,20 @@
-// cunaod se inicia el servidor/pagina web, para tener unos libros7autores por defecto
-
 import mongoose from "mongoose";
 import Book from "./models/Books.js";
 import Author from "./models/Authors.js";
 
-// URI de conexión por defecto
+// URI default connection
 const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/Library";
 
 async function run() {
-  // Conectar a la base de datos
+  // connect to the database
   await mongoose.connect(MONGO_URI);
 
-  // Limpiar colecciones existentes (borrar datos antiguos)
-  // .catch(() => {}) ignora errores si la colección no existe
+  // delete old data
+  // .catch(() => {}) ignores errors if the collection doesn't exist
   await Book.collection.drop().catch(() => {});
   await Author.collection.drop().catch(() => {});
 
-  // Crear refugios de ejemplo
+  // Crear authors
   const author = await Author.insertMany([
     { name: "Jane Austen", 
         biography: "", 
@@ -42,7 +40,7 @@ async function run() {
 
   const [s1, s2, s3, s4, s5] = Author;
 
-  // Crear libros de ejemplo y asignarlos a los refugios creados
+  // Create book and link to authors
   await Book.insertMany([
     { name: "Pride and Prejudice", authorId: "s1._id", genre: "Romatic Comedy", 
         synopsis: "Pride and Prejudice by Jane Austen follows witty Elizabeth Bennet and wealthy, arrogant Mr. Darcy, as they overcome"

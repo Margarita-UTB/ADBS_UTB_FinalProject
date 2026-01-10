@@ -21,7 +21,26 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:id", async (req, res, next) => {
+router.get("/search", async (req, res, next) => {
+  try {
+    const q = String(req.query.q || "").trim();
+
+    if (!q) {
+      const books = await Book.find().lean();
+      return res.json({ ok: true, data: books });
+    }
+
+    const books = await Book.find({
+      $text: { $search: q }
+    }).lean();
+
+    res.json({ ok: true, data: books });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/:id([0-9a-fA-F]{24})", async (req, res, next) => {
   try {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -32,20 +51,6 @@ router.get("/:id", async (req, res, next) => {
       return res.status(404).json({ ok: false, error: "Book not found" });
     }
     res.json({ ok: true, data: book });
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.get("/search", async (req, res, next) => {
-  try {
-    const q = String(req.query.q || "").trim();
-    if (!q) {
-      const books = await Book.find().lean();
-      return res.json({ ok: true, data: books });
-    }
-    const books = await Book.find({ $text: { $search: q } }).lean();
-    res.json({ ok: true, data: books });
   } catch (err) {
     next(err);
   }
