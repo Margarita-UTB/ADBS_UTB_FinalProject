@@ -14,7 +14,7 @@ async function run() {
   await Book.collection.drop().catch(() => {});
   await Author.collection.drop().catch(() => {});
 
-  // Crear authors
+  // Create authors
   const author = await Author.insertMany([
     { name: "Jane Austen", 
         biography: "", 

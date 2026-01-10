@@ -6,7 +6,7 @@ import type { Author } from "./api";
 function Author() {
   const [author, setAuthor] = useState<Author[]>([]);
   const [loading, setLoading] = useState(false);
-  const [editingId, setEditingId] = useState<string | null>(null); // ID del refugio que se está editando
+  const [editingId, setEditingId] = useState<string | null>(null); // ID of the author that is being edited
   const [form, setForm] = useState<{ name: string; biography: string; bookspublished: string }>({
     name: "",
     biography: "",
@@ -104,7 +104,7 @@ function Author() {
                 <div>Libros publicados: {s.bookspublished}</div>
                 <div className="actions">
                   <button className="btn btn-outline" onClick={() => { setEditingId(s._id); setForm({ name: s.name, biography: s.biography, bookspublished: s.bookspublished }); }}>Editar</button>
-                  <button className="btn btn-danger" onClick={() => deleteAuthor(s._id)}>Eliminar</button>
+                  <button className="btn btn-danger" onClick={() => deleteAuthor(s._id)}>Delete</button>
                 </div>
               </>
             )}

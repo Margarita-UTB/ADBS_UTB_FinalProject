@@ -32,7 +32,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ ok: false, error: "Internal server error" });
 });
 
-// Función para asegurar datos iniciales (semilla) si la DB está vacía
+// function to make sure there is inital data if the Database is empty
 async function ensureSeed() {
   const sc = await Author.countDocuments();
   const ac = await Book.countDocuments();

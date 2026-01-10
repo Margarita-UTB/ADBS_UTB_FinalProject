@@ -18,7 +18,7 @@ function BookDetails({ mode }: { mode: Mode }) {
     genre: "",
     synopsis: "",
   });
-  const [busy, setBusy] = useState(false); // Estado para deshabilitar botones durante peticiones
+  const [busy, setBusy] = useState(false); // state to inhabilit buttons while petitions
 
   // Determines the current mode based on the received prop
   const currentMode: Mode = useMemo(() => {
@@ -62,7 +62,7 @@ function BookDetails({ mode }: { mode: Mode }) {
     loadAuthors();
   }, [currentMode]);
 
-  // Manege saving (create or update)
+  // Manage saving (create or update)
   async function onSave() {
     setBusy(true);
     try {
@@ -107,7 +107,7 @@ function BookDetails({ mode }: { mode: Mode }) {
           )}
           <div className="actions">
             <button className="btn btn-primary" onClick={() => navigate(`/books/${book._id}/edit`)}>Editar</button>
-            <button className="btn btn-danger" onClick={onDelete}>Eliminar</button>
+            <button className="btn btn-danger" onClick={onDelete}>Delete</button>
           </div>
         </div>
       )}
@@ -142,7 +142,7 @@ function BookDetails({ mode }: { mode: Mode }) {
           <div className="actions">
             <button className="btn btn-primary" type="submit" disabled={busy}>{currentMode === "create" ? "Crear" : "Guardar"}</button>
             {currentMode === "edit" && (
-              <button type="button" className="btn btn-danger" onClick={onDelete} disabled={busy}>Eliminar</button>
+              <button type="button" className="btn btn-danger" onClick={onDelete} disabled={busy}>Delete</button>
             )}
           </div>
         </form>
